@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('user_links', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("user_id");
-            $table->string("original_links");
-            $table->string("new_links");
+            $table->unsignedBigInteger("user_id")->constrained()->cascadeOnDelete();
+            $table->string("original_link");
+            $table->string("short_code")->unique();
             $table->timestamps();
         });
-        Schema::create('link_clicks', function (Blueprint $table) {
+        Schema::create('link_visits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger("owner_user");
-            $table->string("link");
-            $table->string('ip_address', 45)->nullable();
-            $table->dateTime("transition_date");
+            $table->foreignId("user_link_id")
+                    ->constrained('user_links')
+                    ->cascadeOnDelete();
+            $table->ipAddress('ip_address');
+            $table->text("user_agent")->nullable();
             $table->timestamps();
         });
     }

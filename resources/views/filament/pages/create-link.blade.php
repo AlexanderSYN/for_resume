@@ -1,11 +1,10 @@
 <x-filament-panels::page>
-    <form wire:submit.prevent="save" class="space-y-6">
+    <x-filament-panels::form wire:submit.prevent="generate">
         {{ $this->form }}
-
-        <div class="flex flex-wrap items-center gap-4 justify-start">
-            <x-filament-panels::form.actions
-                :action="$this->getFormActions()"
-                />
+        <div class="mt-4">
+            <x-filament::button class="w-full" type="submit">
+                Сгенерировать ссылку
+            </x-filament::button>
         </div>
-    </form>
+    </x-filament-panels::form>
 </x-filament-panels::page>
