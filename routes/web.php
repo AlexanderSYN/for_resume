@@ -18,3 +18,4 @@ Route::get('/{code}', function ($code) {
 
     return redirect()->away($link->original_link);
 });
+
